@@ -18,30 +18,12 @@ qa-buddy/
   tests/              8 pengujian otomatis (pytest)
 ```
 
-## Menjalankan (Windows 11 / PowerShell)
-```powershell
-cd qa-buddy
-python -m venv .venv
-.venv\Scripts\Activate.ps1
-pip install -r requirements.txt
-python app.py        # buka http://127.0.0.1:5000
-```
-- Tanpa `ANTHROPIC_API_KEY`, aplikasi berjalan dalam **mode demo** (menampilkan output contoh,
-  ditandai jelas di antarmuka).
-- Untuk memakai model sungguhan: `$env:ANTHROPIC_API_KEY="sk-ant-..."` lalu jalankan ulang.
-  Model dapat diganti lewat `QA_BUDDY_MODEL`.
-
 CLI:
 ```powershell
 python cli.py examples/input-login.md --out hasil.csv
 ```
 
 Pengujian: `python -m pytest -q`
-
-## Memakai prompt di IBM Bob
-1. `python build_prompt.py` -> hasil: `prompts/system-prompt.generated.md`
-2. Di IBM Bob, tempel isi file itu sebagai instruksi mode/agent (custom mode atau awal chat).
-3. Kirim isi `examples/input-login.md` dan bandingkan dengan `examples/output-login.md`.
 
 ## Keamanan
 API key hanya dibaca dari environment variable dan tidak pernah disimpan di repo
