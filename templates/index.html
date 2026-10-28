@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>QA Buddy - Generator Test Case</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header class="top">
+    <h1>QA Buddy</h1>
+    <p>Ubah requirement menjadi test case yang siap dieksekusi.</p>
+    <span class="mode {{ 'live' if live else 'demo' }}" id="mode">
+      {{ 'Model aktif' if live else 'Mode demo: output contoh, belum terhubung ke model' }}
+    </span>
+  </header>
+
+  <main class="workbench">
+    <section class="input-pane" aria-labelledby="req-title">
+      <h2 id="req-title">Requirement</h2>
+      <label for="context">Konteks proyek (opsional)</label>
+      <input id="context" type="text" maxlength="300" placeholder="Contoh: toko online berbasis web, pengguna umum">
+
+      <label for="requirement">Tempel requirement atau user story</label>
+      <textarea id="requirement" rows="14" maxlength="8000" placeholder="REQ-1: Pengguna dapat login dengan email dan password terdaftar.&#10;REQ-2: Password minimal 8 karakter."></textarea>
+
+      <div class="actions">
+        <button id="generate" class="primary" type="button">Buat test case</button>
+        <button id="sample" class="ghost" type="button">Isi contoh login</button>
+      </div>
+      <p id="status" class="status" role="status" aria-live="polite"></p>
+    </section>
+
+    <section class="output-pane" aria-labelledby="out-title">
+      <div class="out-head">
+        <h2 id="out-title">Hasil</h2>
+        <div class="out-tools">
+          <button id="copy" class="ghost" type="button" disabled>Salin markdown</button>
+          <button id="export" class="ghost" type="button" disabled>Unduh CSV</button>
+        </div>
+      </div>
+      <div id="summary" class="summary" hidden></div>
+      <div id="empty" class="empty">
+        <p>Belum ada hasil. Tempel requirement di kiri, lalu pilih <strong>Buat test case</strong>.</p>
+      </div>
+      <div class="table-wrap" id="table-wrap" hidden>
+        <table id="cases">
+          <thead>
+            <tr>
+              <th>ID</th><th>Req</th><th>Judul</th><th>Kategori</th><th>Prioritas</th>
+              <th>Precondition</th><th>Langkah</th><th>Data uji</th><th>Expected result</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <details id="raw-wrap" hidden>
+        <summary>Lihat respons mentah (markdown)</summary>
+        <pre id="raw"></pre>
+      </details>
+    </section>
+  </main>
+
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>

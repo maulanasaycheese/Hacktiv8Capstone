@@ -1,0 +1,81 @@
+:root {
+  --paper: #f1f4f6;
+  --panel: #ffffff;
+  --ink: #14202b;
+  --muted: #5b6b78;
+  --line: #d3dce3;
+  --accent: #0b6e99;
+  --accent-dark: #084f6f;
+  --ok: #1f6b46;
+  --bad: #9a3b2a;
+  --warn: #8a5a00;
+  --mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+  --sans: "IBM Plex Sans", system-ui, "Segoe UI", sans-serif;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--sans); line-height: 1.5; }
+
+.top { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 20px; padding: 18px 28px; background: var(--ink); color: #fff; }
+.top h1 { margin: 0; font-size: 1.35rem; font-weight: 600; }
+.top p { margin: 0; color: #b9c6d0; flex: 1 1 260px; }
+.mode { font-size: 0.85rem; padding: 3px 10px; border-radius: 4px; }
+.mode.demo { background: #f3d9a4; color: #4a3200; }
+.mode.live { background: #bfe3cf; color: #12402a; }
+
+.workbench { display: grid; grid-template-columns: minmax(280px, 380px) minmax(0, 1fr); gap: 20px; padding: 20px 28px 40px; align-items: start; }
+.input-pane, .output-pane { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 18px 20px; }
+.input-pane { position: sticky; top: 16px; }
+h2 { margin: 0 0 12px; font-size: 1.05rem; font-weight: 600; }
+
+label { display: block; margin: 14px 0 5px; font-size: 0.9rem; font-weight: 500; }
+input[type=text], textarea {
+  width: 100%; padding: 9px 10px; border: 1px solid var(--line); border-radius: 4px;
+  font: inherit; color: inherit; background: #fbfcfd; resize: vertical;
+}
+textarea { font-family: var(--mono); font-size: 0.88rem; line-height: 1.55; }
+input:focus-visible, textarea:focus-visible, button:focus-visible, summary:focus-visible {
+  outline: 3px solid #7cc0de; outline-offset: 1px;
+}
+
+.actions { display: flex; gap: 10px; margin-top: 16px; flex-wrap: wrap; }
+button { font: inherit; cursor: pointer; border-radius: 4px; padding: 8px 14px; border: 1px solid var(--line); background: #fff; color: var(--ink); }
+button.primary { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 500; }
+button.primary:hover:not(:disabled) { background: var(--accent-dark); }
+button.ghost:hover:not(:disabled) { border-color: var(--accent); color: var(--accent-dark); }
+button:disabled { opacity: 0.5; cursor: not-allowed; }
+.status { min-height: 1.4em; margin: 12px 0 0; font-size: 0.9rem; color: var(--muted); }
+.status.error { color: var(--bad); font-weight: 500; }
+
+.out-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+.out-tools { display: flex; gap: 8px; }
+
+.summary { display: flex; flex-wrap: wrap; gap: 8px; margin: 4px 0 14px; }
+.chip { font-size: 0.82rem; padding: 3px 9px; border: 1px solid var(--line); border-radius: 999px; background: #f7f9fa; }
+.chip b { font-family: var(--mono); font-weight: 500; }
+
+.empty { padding: 36px 8px; color: var(--muted); text-align: center; }
+
+.table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 4px; }
+table { border-collapse: collapse; width: 100%; min-width: 980px; font-size: 0.88rem; }
+th, td { text-align: left; vertical-align: top; padding: 9px 10px; border-bottom: 1px solid var(--line); }
+th { background: #eaf0f4; font-weight: 600; position: sticky; top: 0; }
+tbody tr:last-child td { border-bottom: 0; }
+td.id, td.req, td.data { font-family: var(--mono); font-size: 0.82rem; white-space: nowrap; }
+td.steps div + div { margin-top: 2px; }
+.tag { display: inline-block; padding: 1px 8px; border-radius: 3px; font-size: 0.8rem; background: #e9eef2; }
+.tag.Positive { background: #d6ecdf; color: var(--ok); }
+.tag.Negative { background: #f3dcd6; color: var(--bad); }
+.tag.Boundary, .tag.Edge { background: #d9e8f2; color: var(--accent-dark); }
+.tag.Security { background: #f1e3c4; color: var(--warn); }
+.prio-High { font-weight: 600; }
+
+details { margin-top: 16px; }
+summary { cursor: pointer; font-size: 0.9rem; color: var(--accent-dark); }
+pre { white-space: pre-wrap; background: #f7f9fa; border: 1px solid var(--line); padding: 12px; border-radius: 4px; font-family: var(--mono); font-size: 0.8rem; max-height: 420px; overflow: auto; }
+
+@media (max-width: 900px) {
+  .workbench { grid-template-columns: 1fr; padding: 14px; }
+  .input-pane { position: static; }
+  .top { padding: 14px; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
